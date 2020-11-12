@@ -4,12 +4,14 @@
 \alias{clean_household_size}
 \title{clean household_size}
 \usage{
-clean_household_size(data, var_name)
+clean_household_size(data, var_name, NA_types = FALSE)
 }
 \arguments{
 \item{data}{a data frame from CSES}
 
 \item{var_name}{the name of the column with household_size}
+
+\item{NA_types}{Should CSES varying NA types be preserved? Defaults to FALSE}
 }
 \description{
 clean household_size

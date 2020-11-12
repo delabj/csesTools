@@ -4,7 +4,13 @@
 \alias{calc_labor_force_status}
 \title{Calculate Labor Force Status}
 \usage{
-calc_labor_force_status(data, var_name, new_name)
+calc_labor_force_status(
+  data,
+  var_name,
+  new_name,
+  values_in = c(1, 2, 3, 4, 5),
+  values_out = c(6, 7, 8, 9, 10, 11, 12)
+)
 }
 \arguments{
 \item{data}{A data frame}
@@ -12,6 +18,10 @@ calc_labor_force_status(data, var_name, new_name)
 \item{var_name}{Name of column with employment status}
 
 \item{new_name}{Name of new column}
+
+\item{values_in}{Vector of values considered in the labor force}
+
+\item{values_out}{Vector of values considered out of the labor force}
 }
 \value{
 a tbl with a new column for labor force

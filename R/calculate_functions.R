@@ -3,17 +3,21 @@
 #' @param data A data frame
 #' @param var_name Name of column with employment status
 #' @param new_name Name of new column
+#' @param values_in Vector of values considered in the labor force
+#' @param values_out Vector of values considered out of the labor force
 #'
 #' @return a tbl with a new column for labor force
 #'
 #' @export
-calc_labor_force_status <- function(data, var_name, new_name){
+calc_labor_force_status <- function(data, var_name, new_name,
+                                    values_in = c(1,2,3,4,5),
+                                    values_out = c(6,7,8,9,10,11,12)){
     var_name <- ggplot2::enquo(var_name)
 
     data %>%
         dplyr::mutate(!!new_name :=  dplyr::case_when(
-            !!var_name %in% c(1,2,3,4,5)  ~ "In",
-            !!var_name %in% c(6,7,8,9,10) ~ "Not In" ,
+            !!var_name %in% values_in  ~ "In",
+            !!var_name %in% values_out ~ "Not In" ,
             TRUE ~ NA_character_
         ))
 }
@@ -51,7 +55,11 @@ calc_voted <- function(
 }
 
 
-
+#' Calculate Dominante Party Family
+#'
+#' @param data a data frame
+#'
+#' @export
 calc_dominant_party_family <- function(
     data,
     party_A_vote_share,

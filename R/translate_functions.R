@@ -255,3 +255,22 @@ decode_household_income <- function(data, var_name){
 
         ) )
 }
+
+
+#' Decode election timing encoding
+#'
+#' @param data a data frame from CSES
+#' @param var_name the name of the column with election type
+#'
+#' @export
+decode_survey_timing <- function(data, var_name){
+    var_name <- ggplot2::enquo(var_name)
+
+    data %>%
+        dplyr::mutate(!!var_name :=  dplyr::case_when(
+            !!var_name == 1 ~ "POST-ELECTION STUDY",
+            !!var_name == 2 ~ "PRE-ELECTION AND POST-ELECTION STUDY",
+            !!var_name == 3 ~ "BETWEEN ROUNDS OF MAJORITARIAN ELECTION",
+            TRUE ~ NA_character_
+        ))
+}

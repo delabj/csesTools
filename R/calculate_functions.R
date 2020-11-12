@@ -49,3 +49,63 @@ calc_voted <- function(
         ))
 
 }
+
+
+
+calc_dominant_party_family <- function(
+    data,
+    party_A_vote_share,
+    party_B_vote_share,
+    party_C_vote_share,
+    party_D_vote_share,
+    party_E_vote_share,
+    party_F_vote_share,
+    party_A_family,
+    party_B_family,
+    party_C_family,
+    party_D_family,
+    party_E_family,
+    party_F_family
+){
+    data %>%
+        mutate(idol_dom_party = case_when(
+            # Party A pct share > than all others
+            {{party_A_vote_share}} > {{party_B_vote_share}} &
+                {{party_A_vote_share}} > {{party_C_vote_share}} &
+                {{party_A_vote_share}} > {{party_D_vote_share}} &
+                {{party_A_vote_share}} > {{party_E_vote_share}} &
+                {{party_A_vote_share}} > {{party_F_vote_share}} ~ {{party_A_family}},
+            # Party B pct share > than all others
+            {{party_B_vote_share}} > {{party_A_vote_share}} &
+                {{party_B_vote_share}} > {{party_C_vote_share}} &
+                {{party_B_vote_share}} > {{party_D_vote_share}} &
+                {{party_B_vote_share}} > {{party_E_vote_share}} &
+                {{party_B_vote_share}} > {{party_F_vote_share}} ~ {{party_B_family}},
+            # Party C pct share > than all others
+            {{party_C_vote_share}} > {{party_B_vote_share}} &
+                {{party_C_vote_share}} > {{party_A_vote_share}} &
+                {{party_C_vote_share}} > {{party_D_vote_share}} &
+                {{party_C_vote_share}} > {{party_E_vote_share}} &
+                {{party_C_vote_share}} > {{party_F_vote_share}} ~ {{party_C_family}},
+            # Party D pct share > than all others
+            {{party_D_vote_share}} > {{party_B_vote_share}} &
+                {{party_D_vote_share}} > {{party_C_vote_share}} &
+                {{party_D_vote_share}} > {{party_A_vote_share}} &
+                {{party_D_vote_share}} > {{party_E_vote_share}} &
+                {{party_D_vote_share}} > {{party_F_vote_share}} ~ {{party_D_family}},
+            # Party E pct share > than all others
+            {{party_E_vote_share}} > {{party_B_vote_share}} &
+                {{party_E_vote_share}} > {{party_C_vote_share}} &
+                {{party_E_vote_share}} > {{party_D_vote_share}} &
+                {{party_E_vote_share}} > {{party_A_vote_share}} &
+                {{party_E_vote_share}} > {{party_F_vote_share}} ~ {{party_E_family}},
+            # Party F pct share > than all others
+            {{party_F_vote_share}} > {{party_B_vote_share}} &
+                {{party_F_vote_share}} > {{party_C_vote_share}} &
+                {{party_F_vote_share}} > {{party_D_vote_share}} &
+                {{party_F_vote_share}} > {{party_E_vote_share}} &
+                {{party_F_vote_share}} > {{party_A_vote_share}} ~ {{party_F_family}},
+            TRUE ~ NA_character_
+        ))
+
+}

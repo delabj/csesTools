@@ -1,4 +1,4 @@
-#' Translate election type encoding
+#' decode election type encoding
 #'
 #' @param data a data frame from CSES
 #' @param var_name the name of the column with election type
@@ -6,7 +6,7 @@
 #' @return a tbl
 #'
 #' @export
-translate_election_type <- function(data, var_name){
+decode_election_type <- function(data, var_name){
 
     data %>%
         dplyr::mutate({{var_name}} := dplyr::case_when(
@@ -20,14 +20,14 @@ translate_election_type <- function(data, var_name){
 }
 
 
-#' Translate Respondent Gender
+#' decode Respondent Gender
 #' @param data a data frame from CSES
 #' @param var_name the name of the column with gender encoding
 #'
 #' @return a tbl
 #'
 #' @export
-translate_responder_gender <- function(data, var_name){
+decode_responder_gender <- function(data, var_name){
 
     data %>%
         dplyr::mutate({{var_name}} :=  dplyr::case_when(
@@ -41,14 +41,14 @@ translate_responder_gender <- function(data, var_name){
         )
 }
 
-#' Translate education status
+#' decode education status
 #' @description I've made some opinionated recoding of module 1,2,&3's coding to bring them in line with 4/5
 #'
 #' @param data a data frame from CSES
 #' @param var_name the name of the column with gender encoding
 #' @param module_var name of column with module information
 #' @export
-translate_education <- function(data, var_name, module_var){
+decode_education <- function(data, var_name, module_var){
 
     module_var <- ggplot2::enquo(module_var)
     data %>%
@@ -80,11 +80,11 @@ translate_education <- function(data, var_name, module_var){
         )
 }
 
-#' Translate employment status
+#' decode employment status
 #' @param data a data frame from CSES
 #' @param var_name the name of the column with employment status
 #' @export
-translate_employment_status <- function(data, var_name ){
+decode_employment_status <- function(data, var_name ){
 
 
     data %>%
@@ -107,12 +107,12 @@ translate_employment_status <- function(data, var_name ){
 }
 
 
-#' Translate Residence Type
+#' decode Residence Type
 #' @param data a data frame from CSES
 #' @param var_name the name of the column with Residence Type
 #'
 #' @export
-translate_residence_type <- function(data, var_name){
+decode_residence_type <- function(data, var_name){
 
     data %>%
         dplyr::mutate({{var_name}} :=  dplyr::case_when(
@@ -124,12 +124,12 @@ translate_residence_type <- function(data, var_name){
         ))
 }
 
-#' Translate Satisfaction with democracy
+#' decode Satisfaction with democracy
 #' @param data a data frame from CSES
 #' @param var_name the name of the column with Satisfaction with democracy
 #'
 #' @export
-translate_satisfaction <- function(data, var_name, module_var){
+decode_satisfaction <- function(data, var_name, module_var){
 
     module_var <- ggplot2::enquo(module_var)
 
@@ -162,7 +162,7 @@ translate_satisfaction <- function(data, var_name, module_var){
         ))
 }
 
-#' Translate Belief that Who is in power matters
+#' decode Belief that Who is in power matters
 #'
 #' @param data a data frame with CSES columns
 #' @param var_name name of column containting raw response to question of if who is in power matters
@@ -170,7 +170,7 @@ translate_satisfaction <- function(data, var_name, module_var){
 #' @return a tbl
 #'
 #' @export
-translate_power_matters <- function(data, var_name){
+decode_power_matters <- function(data, var_name){
 
 
 
@@ -182,12 +182,12 @@ translate_power_matters <- function(data, var_name){
 }
 
 
-#' Translate marital status
+#' decode marital status
 #' @param data a data frame from CSES
 #' @param var_name the name of the column with gender encoding
 #'
 #' @export
-translate_marital_status <- function(data, var_name){
+decode_marital_status <- function(data, var_name){
 
     data %>%
         dplyr::mutate({{var_name}} :=  dplyr::case_when(
@@ -203,12 +203,12 @@ translate_marital_status <- function(data, var_name){
 }
 
 
-#' Translate Party Ideological Family
+#' decode Party Ideological Family
 #' @param data a data frame from CSES
 #' @param var_name the name of the column with party_family
 #'
 #' @export
-translate_party_family <- function(data, var_name){
+decode_party_family <- function(data, var_name){
 
     data %>%
         dplyr::mutate({{var_name}} := case_when(
@@ -237,11 +237,11 @@ translate_party_family <- function(data, var_name){
 }
 
 
-#' Translate Household Income
+#' decode Household Income
 #' @param data a data frame from CSES
 #' @param var_name the name of the column with Household Income
 #' @export
-translate_household_income <- function(data, var_name){
+decode_household_income <- function(data, var_name){
 
 
     data %>%

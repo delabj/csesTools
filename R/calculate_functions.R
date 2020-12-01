@@ -42,7 +42,7 @@ calc_voted <- function(
     ){
 
     data %>%
-        mutate(!!voted := case_when(
+        mutate(!!new_name := case_when(
             {{early_module_ballot_1}} == 1 ~ "Voted",
             {{early_module_ballot_2}} == 1 ~ "Voted",
             {{current_pres_1st}}      == 1 ~ "Voted",
@@ -55,13 +55,14 @@ calc_voted <- function(
 }
 
 
-#' Calculate Dominante Party Family
+#' Calculate Dominant Party Family
 #'
 #' @param data a data frame
 #'
 #' @export
 calc_dominant_party_family <- function(
     data,
+    new_name = "dom_party_family",
     party_A_vote_share,
     party_B_vote_share,
     party_C_vote_share,
@@ -76,7 +77,7 @@ calc_dominant_party_family <- function(
     party_F_family
 ){
     data %>%
-        mutate(idol_dom_party = case_when(
+        mutate(!!new_name := case_when(
             # Party A pct share > than all others
             {{party_A_vote_share}} > {{party_B_vote_share}} &
                 {{party_A_vote_share}} > {{party_C_vote_share}} &
@@ -116,4 +117,25 @@ calc_dominant_party_family <- function(
             TRUE ~ NA_character_
         ))
 
+}
+
+
+
+#' Calculate Binary Satisfaction
+#'
+#' @param var_name name of variable with 4 levels of satisfaction
+#'
+#'
+calc_binary_satisfaction <- function(var_name, new_name){
+
+
+    mutate(
+        !!new_name := case_when(
+            str_detect({{var_name}}, "NOT AT ALL SATISFIED") ~ "DISATISFIED",
+            str_detect({{var_name}}, "NOT VERY SATISFIED") ~ "DISATISFIED",
+            str_detect({{var_name}}, "FAIRLY SATISFIED") ~ "SATISFIED",
+            str_detect({{var_name}}, "VERY SATISFIED") ~ "SATISFIED",
+            TRUE ~ NA_character_
+        )
+    )
 }
